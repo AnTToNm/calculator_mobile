@@ -99,7 +99,7 @@ class _CalculatorPageState extends State<CalculatorPage> {
         while (stack.isNotEmpty && stack.last != '(') {
           postfix.add(stack.removeLast());
         }
-        stack.removeLast(); // Remove '('
+        stack.removeLast();
       } else if (token == '+' || token == '-' || token == '×' || token == '÷' || token == '√' || token == 'log') {
         while (stack.isNotEmpty && _precedence(stack.last) >= _precedence(token)) {
           postfix.add(stack.removeLast());
