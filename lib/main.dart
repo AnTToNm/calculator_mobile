@@ -42,7 +42,7 @@ class _CalculatorPageState extends State<CalculatorPage> {
         }
       } else if (buttonText == '√') {
         _expression += '√(';
-      } else if (buttonText == 'log') { // Обработка логарифма
+      } else if (buttonText == 'log') {
         _expression += 'log(';
       } else {
         _expression += buttonText;
