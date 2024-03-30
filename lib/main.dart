@@ -128,7 +128,7 @@ class _CalculatorPageState extends State<CalculatorPage> {
           double operand = stack.removeLast();
           double result = sqrt(operand);
           stack.add(result);
-        } else if (token == 'log') { // Обработка логарифма
+        } else if (token == 'log') {
           double base = stack.removeLast();
           double operand = stack.removeLast();
           double result = log(base) / log(operand);
@@ -163,7 +163,7 @@ class _CalculatorPageState extends State<CalculatorPage> {
   }
 
   void _showDocumentation() async {
-    final url = Uri.parse('https://raw.githubusercontent.com/AnTToNm/calculator_mobile/master/calculator_docs.md'); // Замените URL_ВАШЕГО_CDN на реальный URL
+    final url = Uri.parse('https://raw.githubusercontent.com/AnTToNm/calculator_mobile/master/calculator_docs.md');
     final response = await http.get(url);
     if (response.statusCode == 200) {
       showDialog(
@@ -324,21 +324,21 @@ class _CalculatorPageState extends State<CalculatorPage> {
 
   Widget _buildButton(String buttonText) {
     return Container(
-      margin: EdgeInsets.all(4.0), // Отступы для кнопок
+      margin: EdgeInsets.all(4.0),
       child: MaterialButton(
-        padding: EdgeInsets.all(20.0), // Отступы на 1 пиксель меньше для добавления границы
+        padding: EdgeInsets.all(20.0),
         onPressed: () => _handleClick(buttonText),
         child: Text(
           buttonText,
           style: TextStyle(
             fontSize: 24.0,
-            color: Colors.white, // Цвет текста
+            color: Colors.white,
           ),
         ),
-        color: Colors.lightBlue, // Цвет кнопок
+        color: Colors.lightBlue,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10.0),
-          side: BorderSide(color: Colors.blue), // Границы кнопок
+          side: BorderSide(color: Colors.blue),
         ),
       ),
     );
