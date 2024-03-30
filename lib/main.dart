@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_markdown/flutter_markdown.dart';
 import 'dart:math';
+import 'package:http/http.dart' as http;
 
 void main() {
   runApp(CalculatorApp());
@@ -160,6 +162,35 @@ class _CalculatorPageState extends State<CalculatorPage> {
     }
   }
 
+  void _showDocumentation() async {
+    final url = Uri.parse('https://raw.githubusercontent.com/AnTToNm/calculator_mobile/master/calculator_docs.md'); // Замените URL_ВАШЕГО_CDN на реальный URL
+    final response = await http.get(url);
+    if (response.statusCode == 200) {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text('Документация по калькулятору'),
+            content: SizedBox(
+                width: MediaQuery.of(context).size.width*0.8,
+                height: MediaQuery.of(context).size.height*0.8,
+                child: Markdown(data: response.body)),
+            actions: <Widget>[
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: Text('Закрыть'),
+              ),
+            ],
+          );
+        },
+      );
+    } else {
+      throw Exception('Failed to load documentation');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -167,6 +198,12 @@ class _CalculatorPageState extends State<CalculatorPage> {
         title: Text('Calculator',
         style: TextStyle(color: Colors.white),),
         backgroundColor: Colors.blue,
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.help),
+            onPressed: _showDocumentation,
+          ),
+        ],
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
